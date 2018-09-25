@@ -7,7 +7,7 @@ local $/ = undef; # Глобальная перловая магическая �
 my $errors = 0;
 my @error_msg;
 {
-    my ($name, $path, $suffix) = fileparse($ARGV[0] || '1.18l');
+    my ($name, $path, $suffix) = fileparse($ARGV[0]);
     open FILE, $ARGV[0] or die "Couldn't open file: $!";
     my $string = <FILE>; # Читаем файл целиком.
     close FILE;
