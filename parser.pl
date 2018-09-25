@@ -16,7 +16,7 @@ my @error_msg;
 
     my @all_blocks;
     foreach (@blocks) { # Итерируем по каждому блоку отдельно
-        push @all_blocks, {raw => length $_, result => readblock($_)};
+        push @all_blocks, readblock($_);
     }
 
     # Выводим все полученные ошибки
@@ -27,8 +27,7 @@ my @error_msg;
     }
     close $logfh;
 
-    # print Dumper \@all_blocks; # Выводим текстом готовые данные
-    print "Completed with $errors errors\n"; # И количество ошибок
+    print "Completed with $errors errors\n"; # В консоль принтуем количество ошибок
 
     open my $fh, ">", "$name.json";
     print $fh encode_json(\@all_blocks);
@@ -84,7 +83,6 @@ sub readlines {
         name => $line_name,
         length => $line_length,
         error => $line_error,
-        # hex => \@hex,
         symbols => join('', @line)
     };
     unshift @{$lines}, $result;
